@@ -1,21 +1,23 @@
-#include "script_component.hpp"
+#include "macro.hpp";
 
 // Enable mod
 [
 	SETNAME("enabled"),
 	"CHECKBOX",
 	["Enabled", "Restart is required"],
-	[NICENAME, "General settings"],
+	[TITLE, "General settings"],
 	true,
-	1
+	1,
+	{},
+	true
 ] call CBA_Settings_fnc_init;
 
 // Logic interval
 [
 	SETNAME("logicInterval"),
 	"SLIDER",
-	["Logic interval", "Interval to check for new groups to add the morale logic to."],
-	[NICENAME, "General settings"],
+	["Logic interval", "Interval to check for new groups to add the morale logic to. Default: 60"],
+	[TITLE, "General settings"],
 	[5, 600, 60, 0],
 	1
 ] call CBA_Settings_fnc_init;
@@ -24,8 +26,8 @@
 [
 	SETNAME("moraleBreakPoint"),
 	"SLIDER",
-	["Morale breakpoint", "Units will check for morale when below this value. Recommended value: -0.2."],
-	[NICENAME, "Morale settings"],
+	["Morale breakpoint", "Units will check for morale when below this value. Default: -0.2."],
+	[TITLE, "Morale settings"],
 	[-1, 1, -0.2, 2],
 	1
 ] call CBA_Settings_fnc_init;
@@ -34,8 +36,8 @@
 [
 	SETNAME("moraleCheckCooldown"),
 	"SLIDER",
-	["Morale check cooldown", "How much time has to pass between morale checks."],
-	[NICENAME, "Morale settings"],
+	["Morale check cooldown", "Duration after a unit passes a morale check before a new one can be made. Default: 120"],
+	[TITLE, "Morale settings"],
 	[5, 600, 120, 0],
 	1
 ] call CBA_Settings_fnc_init;
@@ -45,7 +47,7 @@
 	SETNAME("useMoraleDebuff"),
 	"CHECKBOX",
 	["Use morale debuff mechanics", "The larger the morale hit a group takes the less likely they are to have a positive result on the morale check."],
-	[NICENAME, "Morale settings"],
+	[TITLE, "Morale settings"],
 	true,
 	1
 ] call CBA_Settings_fnc_init;
@@ -54,8 +56,8 @@
 [
 	SETNAME("cleanUpInterval"),
 	"SLIDER",
-	["Clean-up interval", "Interval to check for surrendered or fleeing units to clean up."],
-	[NICENAME, "General settings"],
+	["Clean-up interval", "Interval to check for surrendered or fleeing units to clean up. Default: 60"],
+	[TITLE, "General settings"],
 	[30, 600, 60, 0],
 	1
 ] call CBA_Settings_fnc_init;
@@ -64,8 +66,8 @@
 [
 	SETNAME("cleanUpDistance"),
 	"SLIDER",
-	["Clean-up distance", "Do not remove marked unit if a player is within this distance."],
-	[NICENAME, "General settings"],
+	["Clean-up distance", "Do not remove marked unit if a player is within this distance. Default: 800"],
+	[TITLE, "General settings"],
 	[100, 2000, 800, 0],
 	1
 ] call CBA_Settings_fnc_init;
@@ -74,8 +76,8 @@
 [
 	SETNAME("fightingRetreatDuration"),
 	"SLIDER",
-	["Fighting retreat duration", "The duration of a fighting retreat action."],
-	[NICENAME, "Morale actions settings"],
+	["Fighting retreat duration", "The duration of a fighting retreat action. Default: 90"],
+	[TITLE, "Morale actions settings"],
 	[10, 600, 90, 0],
 	1
 ] call CBA_Settings_fnc_init;
@@ -85,7 +87,7 @@
 	SETNAME("aiIgnoreFleeing"),
 	"CHECKBOX",
 	["Ignore fleeing units", "AI will ignore fleeing enemy units if set to true."],
-	[NICENAME, "Morale actions settings"],
+	[TITLE, "Morale actions settings"],
 	true,
 	1
 ] call CBA_Settings_fnc_init;
@@ -94,8 +96,8 @@
 [
 	SETNAME("fleeMinDistance"),
 	"SLIDER",
-	["Flee min distance", "Minimum distance a unit will flee. Needs to be lower than max distance."],
-	[NICENAME, "Morale actions settings"],
+	["Flee min distance", "Minimum distance a unit will flee. Needs to be lower than max distance. Default: 150"],
+	[TITLE, "Morale actions settings"],
 	[0, 1000, 150, 0],
 	1
 ] call CBA_Settings_fnc_init;
@@ -104,8 +106,8 @@
 [
 	SETNAME("fleeMaxDistance"),
 	"SLIDER",
-	["Flee max distance", "Maximum distance a unit will flee. Needs to be higher than min distance."],
-	[NICENAME, "Morale actions settings"],
+	["Flee max distance", "Maximum distance a unit will flee. Needs to be higher than min distance. Default: 500"],
+	[TITLE, "Morale actions settings"],
 	[0, 1000, 500, 0],
 	1
 ] call CBA_Settings_fnc_init;
@@ -115,7 +117,7 @@
 	SETNAME("enableAIGoHostile"),
 	"CHECKBOX",
 	["Enable AI re-engage", "Surrendered units may go hostile if not monitored or handcuffed."],
-	[NICENAME, "Morale actions settings"],
+	[TITLE, "Morale actions settings"],
 	true,
 	1
 ] call CBA_Settings_fnc_init;
@@ -124,8 +126,8 @@
 [
 	SETNAME("goHostileInterval"),
 	"SLIDER",
-	["Re-engage check interval", "Interval to check if a surrendered unit should go hostile."],
-	[NICENAME, "Morale actions settings"],
+	["Re-engage check interval", "Interval to check if a surrendered unit should go hostile. Default: 10"],
+	[TITLE, "Morale actions settings"],
 	[5, 300, 10, 0],
 	1
 ] call CBA_Settings_fnc_init;
@@ -135,7 +137,7 @@
 	SETNAME("enableAddCableTies"),
 	"CHECKBOX",
 	["Add cable ties", "Add cable ties to units."],
-	[NICENAME, "Other"],
+	[TITLE, "Other"],
 	true,
 	1
 ] call CBA_Settings_fnc_init;
@@ -144,8 +146,8 @@
 [
 	SETNAME("cableTieAmountPlayers"),
 	"SLIDER",
-	["Player amount", "Amount of cable ties to add to each unit in player groups."],
-	[NICENAME, "Other"],
+	["Player amount", "Amount of cable ties to add to each unit in player groups. Default: 10"],
+	[TITLE, "Other"],
 	[0, 30, 10, 0],
 	1
 ] call CBA_Settings_fnc_init;
@@ -154,8 +156,8 @@
 [
 	SETNAME("cableTieAmountAI"),
 	"SLIDER",
-	["Player amount", "Amount of cable ties to add to each unit in AI groups."],
-	[NICENAME, "Other"],
+	["AI amount", "Amount of cable ties to add to each unit in AI groups. Default: 2"],
+	[TITLE, "Other"],
 	[0, 30, 2, 0],
 	1
 ] call CBA_Settings_fnc_init;
@@ -164,8 +166,8 @@
 [
 	SETNAME("enableRally"),
 	"CHECKBOX",
-	["Enable rally", "Allows the player to rally surrendered or fleeing allies, making them join the player group."],
-	[NICENAME, "Other"],
+	["Enable rally", "Allows the player to rally surrendered or fleeing allies, having them join the player group."],
+	[TITLE, "Other"],
 	true,
 	1
 ] call CBA_Settings_fnc_init;

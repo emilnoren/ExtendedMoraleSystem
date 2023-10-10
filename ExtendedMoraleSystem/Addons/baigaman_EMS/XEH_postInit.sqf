@@ -1,3 +1,5 @@
-#include "script_component.hpp"
-// #include "XEH_PREP.sqf"
-// #include "Settings.sqf"
+#include "macro.hpp";
+
+hint "MOD LOADED";
+
+[] call FUNC(myFunction);

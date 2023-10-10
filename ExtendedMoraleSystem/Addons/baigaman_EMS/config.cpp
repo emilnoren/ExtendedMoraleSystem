@@ -1,18 +1,24 @@
-#include "script_component.hpp"
-
 class CfgPatches {
-	class ADDON {
+	class baigaman_EMS {
 			name = "Extended Morale System";
 			author = "baigaman";
 			requiredVersion = 2.14;
-			requiredAddons[] = {"CBA_main", "ace_interaction", "lambs_danger"};
+			requiredAddons[] = {"CBA_MAIN"};
 			units[] = {};
 			weapons[] = {};
 	};
 };
 
-class Extended_PostInit_EventHandlers {
-	class ADDON {
-		serverInit = QUOTE(call COMPILE_SCRIPT(XEH_postInit));
+class Extended_PreInit_EventHandlers {
+	class baigaman_EMS {
+		init = call compile preprocessFileLineNumbers "\baigaman_EMS\XEH_preInit.sqf";
+	};
+};
+
+class Extended_PostInit_EventHandlers
+{
+	class baigaman_EMS
+	{
+		init = call compile preprocessFileLineNumbers "\baigaman_EMS\XEH_postInit.sqf";
 	};
 };
