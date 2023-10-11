@@ -1,1 +1,0 @@
-systemChat str ["Hello world!", "LOLLERS"];

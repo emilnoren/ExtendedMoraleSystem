@@ -171,3 +171,13 @@
 	true,
 	1
 ] call CBA_Settings_fnc_init;
+
+// Enable debugging
+[
+	SETNAME("enableDebug"),
+	"CHECKBOX",
+	["Enable debugging", "Dump debugging variables to chat."],
+	[TITLE, "General settings"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
