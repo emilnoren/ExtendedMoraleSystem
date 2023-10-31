@@ -1,11 +1,8 @@
 /*
 TO-DO:
-Remove LAMBS requirement (create custom smoke grenade script)
 Add custom surrender animation setting
 Check despawn script
 Remove surrender script if player joins group
-Options to disable and change behaviours
-More debugging settings
 */
 #include "macro.hpp";
 
@@ -331,11 +328,11 @@ fnc_selectMoraleAction = {
 	// Skill level with corresponding percentages for morale action calculations
 	// index 1 = PASSMORALECHECK, 2 = FIGHTINGRETREAT
 	_skillLevel = [
-		["VLOW", 25, 50],
-		["LOW", 30, 60],
-		["NORMAL", 35, 70],
-		["HIGH", 40, 80],
-		["VHIGH", 45, 90]
+		["VLOW", GVAR(vlowMoralePassChance), (GVAR(vlowMoralePassChance) + GVAR(vlowFightingRetreatChance))],
+		["LOW", GVAR(lowMoralePassChance), (GVAR(lowMoralePassChance) + GVAR(lowFightingRetreatChance))],
+		["NORMAL", GVAR(normalMoralePassChance), (GVAR(normalMoralePassChance) + GVAR(normalFightingRetreatChance))],
+		["HIGH", GVAR(highMoralePassChance), (GVAR(highMoralePassChance) + GVAR(highFightingRetreatChance))],
+		["VHIGH", GVAR(vhighMoralePassChance), (GVAR(vhighMoralePassChance) + GVAR(vhighFightingRetreatChance))]
 	] select {
 		_x select 0 == _group getVariable "skillLevel"
 	};
@@ -692,11 +689,11 @@ fnc_assignSleeperHostiles = {
 	
 	// Index 1 = skillLevel, 2 = chance to turn hostile in percentage
 	_skillLevel = [
-		["VLOW", 40],
-		["LOW", 60],
-		["NORMAL", 80],
-		["HIGH", 90],
-		["VHIGH", 100]
+		["VLOW", GVAR(vlowGoHostileChance)],
+		["LOW", GVAR(lowGoHostileChance)],
+		["NORMAL", GVAR(normalGoHostileChance)],
+		["HIGH", GVAR(highGoHostileChance)],
+		["VHIGH", GVAR(vhighGoHostileChance)]
 	] select {
 		_x select 0 == _group getVariable "skillLevel"
 	};
@@ -918,15 +915,15 @@ fnc_setGroupSkillLevel = {
 
 	switch (true) do {
 
-		case (_skill < 25): {
+		case (_skill < 30): {
 			_group setVariable ["skillLevel", "VLOW"];
 		};
 
-		case (_skill >= 25 && _skill < 40): {
+		case (_skill >= 30 && _skill < 50): {
 			_group setVariable ["skillLevel", "LOW"];
 		};
 
-		case (_skill >= 40 && _skill < 60): {
+		case (_skill >= 50 && _skill < 60): {
 			_group setVariable ["skillLevel", "NORMAL"];
 		};
 
@@ -967,23 +964,23 @@ fnc_checkCasualties = {
 	switch (_skillLevel) do {
 
 		case "VLOW": {
-			_casualtyPercentageThreshold = 30;
+			_casualtyPercentageThreshold = GVAR(vlowCasualtyThreshold);
 		};
 
 		case "LOW": {
-			_casualtyPercentageThreshold = 40;
+			_casualtyPercentageThreshold = GVAR(lowCasualtyThreshold);
 		};
 
 		case "NORMAL": {
-			_casualtyPercentageThreshold = 50;
+			_casualtyPercentageThreshold = GVAR(normalCasualtyThreshold);
 		};
 
 		case "HIGH": {
-			_casualtyPercentageThreshold = 60;
+			_casualtyPercentageThreshold = GVAR(highCasualtyThreshold);
 		};
 
 		case "VHIGH": {
-			_casualtyPercentageThreshold = 70;
+			_casualtyPercentageThreshold = GVAR(vhighCasualtyThreshold);
 		};
 
 		default {};
@@ -1279,11 +1276,11 @@ fnc_groupSmokeCover = {
 
 	// Index 1 = skillLevel, 2 = chance to throw smoke in percentage
 	_skillLevel = [
-		["VLOW", 40],
-		["LOW", 60],
-		["NORMAL", 80],
-		["HIGH", 90],
-		["VHIGH", 100]
+		["VLOW", GVAR(vlowSmokeChance)],
+		["LOW", GVAR(lowSmokeChance)],
+		["NORMAL", GVAR(normalSmokeChance)],
+		["HIGH", GVAR(highSmokeChance)],
+		["VHIGH", GVAR(vhighSmokeChance)]
 	] select {
 		_x select 0 == _group getVariable "skillLevel"
 	};

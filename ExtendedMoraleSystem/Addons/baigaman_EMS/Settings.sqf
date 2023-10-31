@@ -189,6 +189,260 @@
 ] call CBA_Settings_fnc_init;
 
 ///////////////////////////////////////////////////
+/* ADVANCED SETTINGS                             */
+///////////////////////////////////////////////////
+
+// VLOW casualty threshold
+[
+	SETNAME("vlowCasualtyThreshold"),
+	"SLIDER",
+	["VLOW casualty threshold", "Amount of casualties in percent a VLOW skilled group has to suffer before they start taking morale checks. Default: 30"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 30, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// VLOW morale pass chance
+[
+	SETNAME("vlowMoralePassChance"),
+	"SLIDER",
+	["VLOW pass chance", "Chance for VLOW skilled groups to pass a morale check. The sum of this and the fighting retreat chance need to be less or equal to 100. Default: 25"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 25, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// VLOW fighting retreat chance
+[
+	SETNAME("vlowFightingRetreatChance"),
+	"SLIDER",
+	["VLOW fighting retreat chance", "Chance for VLOW skilled groups to do the fighting retreat action. The sum of this and the pass chance need to be less or equal to 100. Default: 25"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 25, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// VLOW smoke chance
+[
+	SETNAME("vlowSmokeChance"),
+	"SLIDER",
+	["VLOW smoke chance", "Chance for each unit in VLOW skilled groups to drop smoke grenades during the fighting retreat action. Default: 40"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 40, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// VLOW go hostile chance
+[
+	SETNAME("vlowGoHostileChance"),
+	"SLIDER",
+	["VLOW go hostile chance", "Chance for VLOW skilled groups to go hostile again after surrendering. Default: 40"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 40, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// LOW casualty threshold
+[
+	SETNAME("lowCasualtyThreshold"),
+	"SLIDER",
+	["LOW casualty threshold", "Amount of casualties in percent a LOW skilled group has to suffer before they start taking morale checks. Default: 40"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 40, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// LOW morale pass chance
+[
+	SETNAME("lowMoralePassChance"),
+	"SLIDER",
+	["LOW pass chance", "Chance for LOW skilled groups to pass a morale check. The sum of this and the fighting retreat chance need to be less or equal to 100. Default: 30"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 30, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// LOW fighting retreat chance
+[
+	SETNAME("lowFightingRetreatChance"),
+	"SLIDER",
+	["LOW fighting retreat chance", "Chance for LOW skilled groups to do the fighting retreat action. The sum of this and the pass chance need to be less or equal to 100. Default: 30"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 30, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// LOW smoke chance
+[
+	SETNAME("lowSmokeChance"),
+	"SLIDER",
+	["LOW smoke chance", "Chance for each unit in LOW skilled groups to drop smoke grenades during the fighting retreat action. Default: 60"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 60, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// LOW go hostile chance
+[
+	SETNAME("lowGoHostileChance"),
+	"SLIDER",
+	["LOW go hostile chance", "Chance for LOW skilled groups to go hostile again after surrendering. Default: 60"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 60, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// NORMAL casualty threshold
+[
+	SETNAME("normalCasualtyThreshold"),
+	"SLIDER",
+	["NORMAL casualty threshold", "Amount of casualties in percent a NORMAL skilled group has to suffer before they start taking morale checks. Default: 50"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 50, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// NORMAL morale pass chance
+[
+	SETNAME("normalMoralePassChance"),
+	"SLIDER",
+	["NORMAL pass chance", "Chance for NORMAL skilled groups to pass a morale check. The sum of this and the fighting retreat chance need to be less or equal to 100. Default: 35"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 35, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// NORMAL fighting retreat chance
+[
+	SETNAME("normalFightingRetreatChance"),
+	"SLIDER",
+	["NORMAL fighting retreat chance", "Chance for NORMAL skilled groups to do the fighting retreat action. The sum of this and the pass chance need to be less or equal to 100. Default: 35"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 35, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// NORMAL smoke chance
+[
+	SETNAME("normalSmokeChance"),
+	"SLIDER",
+	["NORMAL smoke chance", "Chance for each unit in NORMAL skilled groups to drop smoke grenades during the fighting retreat action. Default: 80"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 80, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// NORMAL go hostile chance
+[
+	SETNAME("normalGoHostileChance"),
+	"SLIDER",
+	["NORMAL go hostile chance", "Chance for NORMAL skilled groups to go hostile again after surrendering. Default: 80"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 80, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// HIGH casualty threshold
+[
+	SETNAME("highCasualtyThreshold"),
+	"SLIDER",
+	["HIGH casualty threshold", "Amount of casualties in percent a HIGH skilled group has to suffer before they start taking morale checks. Default: 60"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 60, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// HIGH morale pass chance
+[
+	SETNAME("highMoralePassChance"),
+	"SLIDER",
+	["HIGH pass chance", "Chance for HIGH skilled groups to pass a morale check. The sum of this and the fighting retreat chance need to be less or equal to 100. Default: 40"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 40, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// HIGH fighting retreat chance
+[
+	SETNAME("highFightingRetreatChance"),
+	"SLIDER",
+	["HIGH fighting retreat chance", "Chance for HIGH skilled groups to do the fighting retreat action. The sum of this and the pass chance need to be less or equal to 100. Default: 40"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 40, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// HIGH smoke chance
+[
+	SETNAME("highSmokeChance"),
+	"SLIDER",
+	["HIGH smoke chance", "Chance for each unit in HIGH skilled groups to drop smoke grenades during the fighting retreat action. Default: 90"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 90, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// HIGH go hostile chance
+[
+	SETNAME("highGoHostileChance"),
+	"SLIDER",
+	["HIGH go hostile chance", "Chance for HIGH skilled groups to go hostile again after surrendering. Default: 90"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 90, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// VHIGH casualty threshold
+[
+	SETNAME("vhighCasualtyThreshold"),
+	"SLIDER",
+	["VHIGH casualty threshold", "Amount of casualties in percent a VHIGH skilled group has to suffer before they start taking morale checks. Default: 70"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 70, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// VHIGH morale pass chance
+[
+	SETNAME("vhighMoralePassChance"),
+	"SLIDER",
+	["VHIGH pass chance", "Chance for VHIGH skilled groups to pass a morale check. The sum of this and the fighting retreat chance need to be less or equal to 100. Default: 45"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 45, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// VHIGH fighting retreat chance
+[
+	SETNAME("vhighFightingRetreatChance"),
+	"SLIDER",
+	["VHIGH fighting retreat chance", "Chance for VHIGH skilled groups to do the fighting retreat action. The sum of this and the pass chance need to be less or equal to 100. Default: 45"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 45, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// VHIGH smoke chance
+[
+	SETNAME("vhighSmokeChance"),
+	"SLIDER",
+	["VHIGH smoke chance", "Chance for each unit in VHIGH skilled groups to drop smoke grenades during the fighting retreat action. Default: 100"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 100, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// VHIGH go hostile chance
+[
+	SETNAME("highGoHostileChance"),
+	"SLIDER",
+	["VHIGH go hostile chance", "Chance for VHIGH skilled groups to go hostile again after surrendering. Default: 100"],
+	[TITLE, "Advanced settings"],
+	[0, 100, 100, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+///////////////////////////////////////////////////
 /* DEBUG                                         */
 ///////////////////////////////////////////////////
 
