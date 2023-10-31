@@ -1,5 +1,9 @@
 #include "macro.hpp";
 
+///////////////////////////////////////////////////
+/* GENERAL SETTINGS                              */
+///////////////////////////////////////////////////
+
 // Enable mod
 [
 	SETNAME("enabled"),
@@ -21,6 +25,30 @@
 	[5, 600, 60, 0],
 	1
 ] call CBA_Settings_fnc_init;
+
+// Clean-up interval
+[
+	SETNAME("cleanUpInterval"),
+	"SLIDER",
+	["Clean-up interval", "Interval to check for surrendered or fleeing units to clean up. Default: 60"],
+	[TITLE, "General settings"],
+	[30, 600, 60, 0],
+	1
+] call CBA_Settings_fnc_init;
+
+// Clean-up distance
+[
+	SETNAME("cleanUpDistance"),
+	"SLIDER",
+	["Clean-up distance", "Do not remove marked unit if a player is within this distance. Default: 800"],
+	[TITLE, "General settings"],
+	[100, 2000, 800, 0],
+	1
+] call CBA_Settings_fnc_init;
+
+///////////////////////////////////////////////////
+/* MORALE SETTINGS                               */
+///////////////////////////////////////////////////
 
 // Morale breakpoint
 [
@@ -52,25 +80,9 @@
 	1
 ] call CBA_Settings_fnc_init;
 
-// Clean-up interval
-[
-	SETNAME("cleanUpInterval"),
-	"SLIDER",
-	["Clean-up interval", "Interval to check for surrendered or fleeing units to clean up. Default: 60"],
-	[TITLE, "General settings"],
-	[30, 600, 60, 0],
-	1
-] call CBA_Settings_fnc_init;
-
-// Clean-up distance
-[
-	SETNAME("cleanUpDistance"),
-	"SLIDER",
-	["Clean-up distance", "Do not remove marked unit if a player is within this distance. Default: 800"],
-	[TITLE, "General settings"],
-	[100, 2000, 800, 0],
-	1
-] call CBA_Settings_fnc_init;
+///////////////////////////////////////////////////
+/* MORALE ACTION SETTINGS                        */
+///////////////////////////////////////////////////
 
 // Fighting retreat duration
 [
@@ -132,6 +144,10 @@
 	1
 ] call CBA_Settings_fnc_init;
 
+///////////////////////////////////////////////////
+/* OTHER                                         */
+///////////////////////////////////////////////////
+
 // Enable add cable ties
 [
 	SETNAME("enableAddCableTies"),
@@ -172,12 +188,106 @@
 	1
 ] call CBA_Settings_fnc_init;
 
-// Enable debugging
+///////////////////////////////////////////////////
+/* DEBUG                                         */
+///////////////////////////////////////////////////
+
+// Debug all
 [
-	SETNAME("enableDebug"),
+	SETNAME("debugAll"),
 	"CHECKBOX",
-	["Enable debugging", "Dump debugging variables to chat."],
-	[TITLE, "General settings"],
+	["Debug all", "Dump all debugging variables to chat."],
+	[TITLE, "Debug"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// Debug clean-up
+[
+	SETNAME("debugCleanUp"),
+	"CHECKBOX",
+	["Debug cleanup", "Dump clean-up debug variables to chat."],
+	[TITLE, "Debug"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// Debug morale event
+[
+	SETNAME("debugMoraleEvent"),
+	"CHECKBOX",
+	["Debug morale event", "Dump morale event debug variables to chat."],
+	[TITLE, "Debug"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// Debug morale action
+[
+	SETNAME("debugMoraleAction"),
+	"CHECKBOX",
+	["Debug morale action", "Dump morale action debug variables to chat."],
+	[TITLE, "Debug"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// Debug fighting retreat
+[
+	SETNAME("debugFightingRetreat"),
+	"CHECKBOX",
+	["Debug fighting retreat action", "Dump fighting retreat debug variables to chat and show fighting retreat target waypoint."],
+	[TITLE, "Debug"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// Debug go hostile
+[
+	SETNAME("debugGoHostile"),
+	"CHECKBOX",
+	["Debug go hostile action", "Dump go hostile debug variables to chat."],
+	[TITLE, "Debug"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// Debug flee
+[
+	SETNAME("debugFlee"),
+	"CHECKBOX",
+	["Debug flee action", "Dump flee debug variables to chat."],
+	[TITLE, "Debug"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// Debug casualties
+[
+	SETNAME("debugCasualties"),
+	"CHECKBOX",
+	["Debug casualties", "Dump casualties debug variables to chat."],
+	[TITLE, "Debug"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// Debug rearm
+[
+	SETNAME("debugRearm"),
+	"CHECKBOX",
+	["Debug rearm", "Dump rearm debug variables to chat."],
+	[TITLE, "Debug"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// Debug morale cooldown
+[
+	SETNAME("debugMoraleCooldown"),
+	"CHECKBOX",
+	["Debug morale cooldown", "Dump cooldown debug variables to chat."],
+	[TITLE, "Debug"],
 	false,
 	1
 ] call CBA_Settings_fnc_init;

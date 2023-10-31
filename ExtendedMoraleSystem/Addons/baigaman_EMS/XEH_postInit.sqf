@@ -1,6 +1,15 @@
+/*
+TO-DO:
+Remove LAMBS requirement (create custom smoke grenade script)
+Add custom surrender animation setting
+Check despawn script
+Remove surrender script if player joins group
+Options to disable and change behaviours
+More debugging settings
+*/
 #include "macro.hpp";
 
-CONSTANT_DEBUG = GVAR(enableDebug); // Debugging variable, set to true to dump debug data to the chat
+CONSTANT_DEBUG = GVAR(debugAll); // Debugging variable, set to true to dump debug data to the chat
 publicVariable "CONSTANT_DEBUG";
 
 PLAYERS = [];
@@ -49,7 +58,7 @@ fnc_init = {
 // I.E. units in groups marked for clean up that are beyond a certain distance from the nearest player and not within line of sight
 fnc_cleanUpInterval = {
 
-	private _LOCALDEBUG = false;
+	private _LOCALDEBUG = GVAR(debugCleanUp);
 	
 	while {true} do {
 
@@ -223,7 +232,7 @@ fnc_addPlayerFiredHandler = {
 fnc_addMoraleHandler = {
 	params ["_group"];
 
-	private _LOCALDEBUG = false;
+	private _LOCALDEBUG = GVAR(debugMoraleEvent);
 
 	_group setVariable ["_debug", _LOCALDEBUG];
 
@@ -273,7 +282,7 @@ fnc_addMoraleHandler = {
 fnc_moraleAction = {
 	params ["_group", "_morale"];
 
-	_LOCALDEBUG = false;
+	_LOCALDEBUG = GVAR(debugMoraleAction);
 
 	_takeMoraleCheck = _group call fnc_checkCasualties;
 
@@ -285,6 +294,8 @@ fnc_moraleAction = {
 	};
 
 	_action = [_group, _morale] call fnc_selectMoraleAction;
+
+	[_LOCALDEBUG, format ['Group %1 action: %2', _group, _action] call fnc_log;
 
 	switch (_action) do { 
 
@@ -428,7 +439,7 @@ fnc_selectMoraleAction = {
 fnc_fightingRetreat = {
 	params ["_group"];
 
-	_LOCALDEBUG = false;
+	_LOCALDEBUG = GVAR(debugFightingRetreat);
 
 	_leader = leader _group;
 	
@@ -526,7 +537,7 @@ fnc_fightingRetreat = {
 fnc_resetGroup = {
 	params ["_group", "_targetPos"];
 
-	_LOCALDEBUG = false;
+	_LOCALDEBUG = GVAR(debugFightingRetreat);
 	
 	_group setVariable ["logicAdded", nil];
 
@@ -592,11 +603,7 @@ fnc_removeWeapons = {
 fnc_dropWeapons = {
 	params ["_unit", "_weapons", "_callback"];
 
-	_LOCALDEBUG = false;
-
 	sleep 0.3;
-
-	[_LOCALDEBUG, format ["Unit is alive: %1", (alive _unit)]] call fnc_log;
 
 	if (!alive _unit) exitWith {};
 	_speed = 1.5;
@@ -710,7 +717,7 @@ fnc_assignSleeperHostiles = {
 fnc_goHostileCheck = {
 	params ["_unit"];
 
-	_LOCALDEBUG = false;
+	_LOCALDEBUG = GVAR(debugGoHostile);
 
 	sleep goHostileInterval;
 
@@ -759,7 +766,7 @@ fnc_goHostileCheck = {
 fnc_flee = {
 	params ["_unit", ["_delay", 6]];
 
-	_LOCALDEBUG = false;
+	_LOCALDEBUG = GVAR(debugFlee);
 
 	if (!alive _unit || _unit getVariable "Fleeing") exitWith {};
 
@@ -942,7 +949,7 @@ fnc_setGroupSkillLevel = {
 fnc_checkCasualties = {
 	params ["_group"];
 
-	_LOCALDEBUG = false;
+	_LOCALDEBUG = GVAR(debugCasualties);
 
 	_takeTest = false;
 
@@ -982,7 +989,7 @@ fnc_checkCasualties = {
 		default {};
 	};
 
-	[_LOCALDEBUG, format ["Alive: %1; Threshold: %2", _percentageAlive, (100 - _casualtyPercentageThreshold)]] call fnc_log;
+	[_LOCALDEBUG, format ["Group %1; Alive: %2; Threshold: %3;", _group, _percentageAlive, (100 - _casualtyPercentageThreshold)]] call fnc_log;
 
 	if (
 		_numOfAliveUnits == 1 
@@ -1132,7 +1139,7 @@ fnc_rearm = {
 fnc_rearmAndEngage = {
 	params ["_unit"];
 
-	_LOCALDEBUG = false;
+	_LOCALDEBUG = GVAR(debugRearm);
 
 	doStop _unit;
 	_unit setVariable ["Hostile", true];
@@ -1228,7 +1235,7 @@ fnc_removeGrenades = {
 fnc_addMoraleCooldown = {
 	params ["_group"];
 
-	_LOCALDEBUG = false;
+	_LOCALDEBUG = GVAR(debugMoraleCooldown);
 
 	_group setVariable ["onMoraleCooldown", true];
 
