@@ -1,6 +1,5 @@
 /*
 TO-DO:
-Add custom surrender animation setting
 Check despawn script
 Remove surrender script if player joins group
 */
@@ -56,6 +55,8 @@ fnc_init = {
 fnc_cleanUpInterval = {
 
 	private _LOCALDEBUG = GVAR(debugCleanUp);
+
+	if (!(GVAR(enableCleanup))) exitWith {};
 	
 	while {true} do {
 

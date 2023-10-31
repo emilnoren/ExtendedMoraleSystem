@@ -26,6 +26,18 @@
 	1
 ] call CBA_Settings_fnc_init;
 
+// Enable mod
+[
+	SETNAME("enableCleanup"),
+	"CHECKBOX",
+	["Enable clean-up logic", "Restart is required"],
+	[TITLE, "General settings"],
+	true,
+	1,
+	{},
+	true
+] call CBA_Settings_fnc_init;
+
 // Clean-up interval
 [
 	SETNAME("cleanUpInterval"),
