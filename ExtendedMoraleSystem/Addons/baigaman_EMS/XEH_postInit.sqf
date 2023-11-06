@@ -1,7 +1,8 @@
 /*
 TO-DO:
-Check despawn script
-Remove surrender script if player joins group
+Settings for skill level cut-offs
+Settings for flee & surrender chance
+Ability to disable morale behaviour for specific sides
 */
 #include "macro.hpp";
 
@@ -69,6 +70,26 @@ fnc_cleanUpInterval = {
 		{
 			_group = _x;
 
+			if (
+				(
+					side _group == west 
+					&& 
+					(GVAR(disableMoraleBlufor))
+				)
+				|| 
+				(
+					side _group == opfor 
+					&& 
+					(GVAR(disableMoraleOpfor))
+				) 
+				|| 
+				(
+					side _group == independent 
+					&& 
+					(GVAR(disableMoraleIndependent))
+				)
+			) exitWith {};
+
 			// Loop through units in each group
 			{
 				_unit = _x;
@@ -114,7 +135,7 @@ fnc_cleanUpInterval = {
 
 };
 
-// Add surrender logic to newly created groups on an interval
+// Add morale logic to newly created groups on an interval
 fnc_addLogicInterval = {
 	
 	while {true} do {
@@ -139,6 +160,7 @@ fnc_addLogicInterval = {
 				_group setVariable ["logicAdded", true];
 				_group allowFleeing 0;
 				_group spawn fnc_setGroupSkillLevel;
+				_group spawn fnc_addPlayerJoinHandler;
 				_group call fnc_addMoraleHandler;
 
 			};
@@ -150,6 +172,40 @@ fnc_addLogicInterval = {
 
 		sleep logicInterval;
 	};
+
+};
+
+// Removes the morale script from group if a player joins
+fnc_addPlayerJoinHandler = {
+	params ["_group"];
+	
+	_group addEventHandler ["UnitJoined", {
+		params ["_group", "_newUnit"];
+
+		private _LOCALDEBUG = GVAR(debugMoraleLogicRemoval);
+
+		_players = PLAYERS select {
+			_x == _newUnit
+		};
+
+		[_LOCALDEBUG, format ["Unit %1 joined group %2; Is player: %3;", _newUnit, _group, (count _players > 0)]] call fnc_log;
+
+		if (count _players == 0) exitWith {};
+
+		{
+
+			_unit = _x;
+			_eventIndex = _unit getVariable ["moraleHandlerEventIndex", -1];
+
+			if (_eventIndex != -1) then {
+
+				_unit removeEventHandler ["FiredNear", _eventIndex];
+
+			};
+
+		} forEach units _group;
+
+	}];
 
 };
 
@@ -238,7 +294,7 @@ fnc_addMoraleHandler = {
 		_x setVariable ["Surrendered", false];
 		_x setVariable ["Cowering", false];
 
-		_x addEventHandler ["FiredNear", {
+		_eventIndex = _x addEventHandler ["FiredNear", {
 			params ["_unit"];
 
 			private _debug = (group _unit) getVariable "_debug";
@@ -271,6 +327,8 @@ fnc_addMoraleHandler = {
 			};
 
 		}];
+
+		_x setVariable ["moraleHandlerEventIndex", _eventIndex];
 	
 	} forEach units _group;
 
@@ -293,7 +351,7 @@ fnc_moraleAction = {
 
 	_action = [_group, _morale] call fnc_selectMoraleAction;
 
-	[_LOCALDEBUG, format ['Group %1 action: %2', _group, _action] call fnc_log;
+	[_LOCALDEBUG, format ['Group %1 action: %2', _group, _action]] call fnc_log;
 
 	switch (_action) do { 
 
@@ -1425,4 +1483,4 @@ fnc_log = {
 
 	}
 
-}
+};
