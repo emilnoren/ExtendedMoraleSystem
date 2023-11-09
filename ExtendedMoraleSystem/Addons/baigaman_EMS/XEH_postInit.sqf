@@ -1,9 +1,3 @@
-/*
-TO-DO:
-Settings for skill level cut-offs
-Settings for flee & surrender chance
-Ability to disable morale behaviour for specific sides
-*/
 #include "macro.hpp";
 
 CONSTANT_DEBUG = GVAR(debugAll); // Debugging variable, set to true to dump debug data to the chat
@@ -70,26 +64,6 @@ fnc_cleanUpInterval = {
 		{
 			_group = _x;
 
-			if (
-				(
-					side _group == west 
-					&& 
-					(GVAR(disableMoraleBlufor))
-				)
-				|| 
-				(
-					side _group == opfor 
-					&& 
-					(GVAR(disableMoraleOpfor))
-				) 
-				|| 
-				(
-					side _group == independent 
-					&& 
-					(GVAR(disableMoraleIndependent))
-				)
-			) exitWith {};
-
 			// Loop through units in each group
 			{
 				_unit = _x;
@@ -154,6 +128,10 @@ fnc_addLogicInterval = {
 				&& 
 				isNil {_group getVariable "logicAdded"} 
 			) then {
+
+				if (side _group == west && (GVAR(disableMoraleBlufor))) exitWith {};
+				if (side _group == opfor && (GVAR(disableMoraleOpfor))) exitWith {};
+				if (side _group == independent && (GVAR(disableMoraleIndependent))) exitWith {};
 
 				_group setVariable ["broken", false];
 				_group setVariable ["onMoraleCooldown", false];
@@ -382,16 +360,16 @@ fnc_moraleAction = {
 fnc_selectMoraleAction = {
 	params ["_group", "_morale"];
 	
-	_action = "";
+	_action = "PASSMORALECHECK";
 
 	// Skill level with corresponding percentages for morale action calculations
 	// index 1 = PASSMORALECHECK, 2 = FIGHTINGRETREAT
 	_skillLevel = [
-		["VLOW", GVAR(vlowMoralePassChance), (GVAR(vlowMoralePassChance) + GVAR(vlowFightingRetreatChance))],
-		["LOW", GVAR(lowMoralePassChance), (GVAR(lowMoralePassChance) + GVAR(lowFightingRetreatChance))],
-		["NORMAL", GVAR(normalMoralePassChance), (GVAR(normalMoralePassChance) + GVAR(normalFightingRetreatChance))],
-		["HIGH", GVAR(highMoralePassChance), (GVAR(highMoralePassChance) + GVAR(highFightingRetreatChance))],
-		["VHIGH", GVAR(vhighMoralePassChance), (GVAR(vhighMoralePassChance) + GVAR(vhighFightingRetreatChance))]
+		["VLOW", GVAR(vlowMoralePassChance), (GVAR(vlowMoralePassChance) + GVAR(vlowFightingRetreatChance)), GVAR(vlowDisableFleeing), GVAR(vlowDisableSurrender)],
+		["LOW", GVAR(lowMoralePassChance), (GVAR(lowMoralePassChance) + GVAR(lowFightingRetreatChance)), GVAR(lowDisableFleeing), GVAR(lowDisableSurrender)],
+		["NORMAL", GVAR(normalMoralePassChance), (GVAR(normalMoralePassChance) + GVAR(normalFightingRetreatChance)), GVAR(normalDisableFleeing), GVAR(normalDisableSurrender)],
+		["HIGH", GVAR(highMoralePassChance), (GVAR(highMoralePassChance) + GVAR(highFightingRetreatChance)), GVAR(highDisableFleeing), GVAR(highDisableSurrender)],
+		["VHIGH", GVAR(vhighMoralePassChance), (GVAR(vhighMoralePassChance) + GVAR(vhighFightingRetreatChance)), GVAR(vhighDisableFleeing), GVAR(vhighDisableSurrender)]
 	] select {
 		_x select 0 == _group getVariable "skillLevel"
 	};
@@ -438,6 +416,18 @@ fnc_selectMoraleAction = {
 
 			switch (true) do {
 
+				case ((_skillLevel select 3) && (_skillLevel select 4)): {
+					_action = "PASSMORALECHECK";
+				}; 
+
+				case ((_skillLevel select 3)): {
+					_action = "SURRENDER";
+				};
+
+				case ((_skillLevel select 4)): {
+					_action = "FLEE";
+				};
+
 				case (_distance <= 40): {
 
 					if (_diceRoll <= 80) then {
@@ -477,7 +467,7 @@ fnc_selectMoraleAction = {
 				};
 
 				default {
-					_action = "FLEE";
+					_action = "PASSMORALECHECK";
 				};
 			};
 

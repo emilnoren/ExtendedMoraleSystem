@@ -284,6 +284,26 @@
 	1
 ] call CBA_Settings_fnc_init;
 
+// VLOW disable fleeing behaviour
+[
+	SETNAME("vlowDisableFleeing"),
+	"CHECKBOX",
+	["VLOW disable fleeing", "Disable fleeing behaviour for VLOW skilled groups."],
+	[TITLE, "5. Advanced settings"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// VLOW disable surrender behaviour
+[
+	SETNAME("vlowDisableSurrender"),
+	"CHECKBOX",
+	["VLOW disable surrender", "Disable surrender behaviour for VLOW skilled groups."],
+	[TITLE, "5. Advanced settings"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
 // LOW casualty threshold
 [
 	SETNAME("lowCasualtyThreshold"),
@@ -331,6 +351,26 @@
 	["LOW go hostile chance", "Chance for LOW skilled groups to go hostile again after surrendering. Default: 60"],
 	[TITLE, "5. Advanced settings"],
 	[0, 100, 60, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// LOW disable fleeing behaviour
+[
+	SETNAME("lowDisableFleeing"),
+	"CHECKBOX",
+	["LOW disable fleeing", "Disable fleeing behaviour for LOW skilled groups."],
+	[TITLE, "5. Advanced settings"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// LOW disable surrender behaviour
+[
+	SETNAME("lowDisableSurrender"),
+	"CHECKBOX",
+	["LOW disable surrender", "Disable surrender behaviour for LOW skilled groups."],
+	[TITLE, "5. Advanced settings"],
+	false,
 	1
 ] call CBA_Settings_fnc_init;
 
@@ -384,6 +424,26 @@
 	1
 ] call CBA_Settings_fnc_init;
 
+// NORMAL disable fleeing behaviour
+[
+	SETNAME("normalDisableFleeing"),
+	"CHECKBOX",
+	["NORMAL disable fleeing", "Disable fleeing behaviour for NORMAL skilled groups."],
+	[TITLE, "5. Advanced settings"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// NORMAL disable surrender behaviour
+[
+	SETNAME("normalDisableSurrender"),
+	"CHECKBOX",
+	["NORMAL disable surrender", "Disable surrender behaviour for NORMAL skilled groups."],
+	[TITLE, "5. Advanced settings"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
 // HIGH casualty threshold
 [
 	SETNAME("highCasualtyThreshold"),
@@ -434,6 +494,26 @@
 	1
 ] call CBA_Settings_fnc_init;
 
+// HIGH disable fleeing behaviour
+[
+	SETNAME("highDisableFleeing"),
+	"CHECKBOX",
+	["HIGH disable fleeing", "Disable fleeing behaviour for HIGH skilled groups."],
+	[TITLE, "5. Advanced settings"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// HIGH disable surrender behaviour
+[
+	SETNAME("highDisableSurrender"),
+	"CHECKBOX",
+	["HIGH disable surrender", "Disable surrender behaviour for HIGH skilled groups."],
+	[TITLE, "5. Advanced settings"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
 // VHIGH casualty threshold
 [
 	SETNAME("vhighCasualtyThreshold"),
@@ -481,6 +561,26 @@
 	["VHIGH go hostile chance", "Chance for VHIGH skilled groups to go hostile again after surrendering. Default: 100"],
 	[TITLE, "5. Advanced settings"],
 	[0, 100, 100, 1],
+	1
+] call CBA_Settings_fnc_init;
+
+// VHIGH disable fleeing behaviour
+[
+	SETNAME("vhighDisableFleeing"),
+	"CHECKBOX",
+	["VHIGH disable fleeing", "Disable fleeing behaviour for VHIGH skilled groups."],
+	[TITLE, "5. Advanced settings"],
+	false,
+	1
+] call CBA_Settings_fnc_init;
+
+// VHIGH disable surrender behaviour
+[
+	SETNAME("vhighDisableSurrender"),
+	"CHECKBOX",
+	["VHIGH disable surrender", "Disable surrender behaviour for VHIGH skilled groups."],
+	[TITLE, "5. Advanced settings"],
+	false,
 	1
 ] call CBA_Settings_fnc_init;
 
