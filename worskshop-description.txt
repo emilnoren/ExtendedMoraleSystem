@@ -1,0 +1,56 @@
+[h2]Description[/h2]
+Bored of the AI always fighting to the last man, with no regard of their own safety? I know I was.
+This mod adds a level of realism to the AI behaviour. The AI will now flee, surrender or make a fighting retreat when morale gets too low.
+Surrendered enemies will also react to being fired upon by running away and cowering. Remember to handcuff any surrendered enemies as if they're left alone they might rejoin the fight.
+
+Check out the addon settings for more information.
+
+[h2]Features[/h2]
+[list]
+[*] New AI behaviours: fleeing, surrendering, cowering and fighting retreat
+[*] Surrendered units may turn hostile if not monitored or handcuffed
+[*] Cowering and surrendered units will flee if shot at
+[*] Adds cable ties to each unit. No extra scripting needed
+[*] Morale check is dependent on squad skill. Higher skilled squads are less likely to have negative outcomes on morale checks
+[*] Players can rally surrendered, cowering or fleeing allies, having them join their squad
+[*] Automatic cleanup of fleeing and surrendered units when no players are nearby and within line of sight
+[*] Should work in both singleplayer and multiplayer
+[/list]
+
+[h2]Requirements[/h2]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=450814997]CBA_A3[/url]
+[url=https://steamcommunity.com/workshop/filedetails/?id=463939057]ACE3[/url]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=1858075458]LAMBS Danger[/url] (Will work without this, but may result in weird behaviours)
+
+[h2]Details[/h2]
+Okay, so you're interested in how this works.
+
+Each AI group gets sorted into one of five skill levels depending on their general skill.
+The general skill thresholds are as follows:
+VLOW: less than 30
+LOW: 30 to 49
+NORMAL: 50 to 64
+HIGH: 65 to 84
+VHIGH: 85 and up
+
+Each skill level has its own settings for morale behaviours and actions.
+
+For example, lets look at the default NORMAL skill level settings:
+The casualty threshold is set to 50%, I.E. half of a groups units has to die before this group starts taking morale checks. Note that groups with a single living unit will always take morale checks.
+When taking a morale check the group has a 35% chance to pass morale checks, and a 35% chance to do a fighting retreat. 
+This adds up to a base chance of 70% for a positive action, and the remaining 30% is the chance that the group surrenders or flees (negative action).
+Before any action is decided upon we apply the morale debuff (if set to active), so depending on how hard the group was hit their 70% chance of a positive outcome might drop quite a bit.
+Check the [url=https://github.com/emilnoren/ExtendedMoraleSystem]GitHub repo[/url] if you're interested in the exact calculations made. 
+When deciding on a negative action the distance to the nearest enemy is considered. A group is much more likely to surrender than flee if the enemy is closing in and vice versa.
+
+Each surrendered unit in a group has a chance to be assigned as 'potentially hostile', depending on the groups skill level. 
+If a potentially hostile unit is left alone without being handcuffed they will pick up a nearby weapon and rejoin the fight.
+
+That's pretty much the gist of it. Let me know if anything is unclear. 
+For a more detailed look at how stuff works please check out the code at [url=https://github.com/emilnoren/ExtendedMoraleSystem]GitHub[/url].
+
+[h2]Other[/h2]
+ARMA 3 modding is just an awful time, so this mod probably won't see much in the way of updates. Feel free to do whatever you please with the codebase. Bang it, eat it, grind it up into little pieces, throw it in the river, just give me a shoutout.
+
+
+[h3][url=https://github.com/emilnoren/ExtendedMoraleSystem]GitHub repository[/url][/h3]

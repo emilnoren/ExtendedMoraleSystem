@@ -972,15 +972,15 @@ fnc_setGroupSkillLevel = {
 			_group setVariable ["skillLevel", "LOW"];
 		};
 
-		case (_skill >= 50 && _skill < 60): {
+		case (_skill >= 50 && _skill < 65): {
 			_group setVariable ["skillLevel", "NORMAL"];
 		};
 
-		case (_skill >= 60 && _skill < 80): {
+		case (_skill >= 65 && _skill < 85): {
 			_group setVariable ["skillLevel", "HIGH"];
 		};
 
-		case (_skill >= 80): {
+		case (_skill >= 85): {
 			_group setVariable ["skillLevel", "VHIGH"];
 		};
 		
